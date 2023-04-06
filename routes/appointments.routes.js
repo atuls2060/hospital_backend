@@ -12,7 +12,10 @@ appointmentsRouter.post("/appointments", (req, res) => {
 
 appointmentsRouter.get("/appointments", async (req, res) => {
     const query = req.query
-    const data = await AppointmentModel.find(query)
+    const { _page, _limit, ...searchQuery } = query
+
+    let data = await AppointmentModel.find(searchQuery)
+
     res.send(data)
 
 })
